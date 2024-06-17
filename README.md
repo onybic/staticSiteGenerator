@@ -1,0 +1,2 @@
+# staticSiteGenerator
+boot.dev
