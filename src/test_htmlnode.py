@@ -22,7 +22,7 @@ class TestHTMLNode(unittest.TestCase):
     def test_repr(self):
         node = HTMLNode("TAG", "VALUE", "CHILDREN", {"href": "https://www.google.com", "target": "_blank"})
         self.assertEqual(
-            "Tag: TAG Value: VALUE Children: CHILDREN Props: {'href': 'https://www.google.com', 'target': '_blank'}",
+            "HTMLNode(Tag: TAG Value: VALUE Children: CHILDREN Props: {'href': 'https://www.google.com', 'target': '_blank'})",
             repr(node)
         )
 

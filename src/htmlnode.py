@@ -1,3 +1,5 @@
+
+
 class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
@@ -12,7 +14,6 @@ class HTMLNode:
         if self.props is None:
             return ""
         props_text = ""
-        print(self.props)
         for key, value in self.props.items():
             props_text += f' {key}="{value}"'
         return props_text

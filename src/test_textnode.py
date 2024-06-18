@@ -1,17 +1,25 @@
 import unittest
 
-from textnode import TextNode
+from textnode import (
+    TextNode,
+    text_type_text,
+    text_type_bold,
+    text_type_code,
+    text_type_link,
+    text_type_image,
+    text_type_italic
+)
 
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
-        node = TextNode("This is a text node", "bold")
-        node2 = TextNode("This is a text node", "bold")
+        node = TextNode("This is a text node", text_type_text, )
+        node2 = TextNode("This is a text node", text_type_text, )
         self.assertEqual(node, node2)
 
     def test_notEqual(self):
-        node = TextNode("Test1", "italics", "https://url.test")
-        node2 = TextNode("test2", "italics")
+        node = TextNode("Test1", text_type_italic, "https://url.test")
+        node2 = TextNode("test2", text_type_italic)
         self.assertNotEqual(node, node2)
 
     def test_notEqual2(self):
@@ -27,6 +35,10 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(
             "TextNode(This is a text node, bold, None)", repr(node)
         )
+
+    def test_t2html(self):
+        node = TextNode("This is bolded text", text_type_bold, None).text_node_to_html_node()
+        self.assertEqual(node.__repr__(), "LeafNode(Tag: b, Value: This is bolded text, Props: None)")
 
 
 if __name__ == '__main__':
