@@ -33,7 +33,7 @@ class TestTextNode(unittest.TestCase):
     def test_repr(self):
         node = TextNode("This is a text node", "bold")
         self.assertEqual(
-            "TextNode(This is a text node, bold, None)", repr(node)
+            'TextNode("This is a text node", "bold", "None")', repr(node)
         )
 
     def test_t2html(self):
