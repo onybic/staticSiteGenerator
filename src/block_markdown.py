@@ -20,41 +20,46 @@ def markdown_to_blocks(markdown):
     return new_blocks
 
 
-def block_to_block_type(block):
-    lines = block.split("\n")
-    if (
-            block.startswith("# ")
+def is_block_heading_block(block):
+    return (block.startswith("# ")
             or block.startswith("## ")
             or block.startswith("### ")
             or block.startswith("#### ")
             or block.startswith("##### ")
-            or block.startswith("###### ")
-    ):
+            or block.startswith("###### "))
+
+
+def is_block_code_block(lines):
+    return len(lines) > 1 and lines[0].startswith("```") and lines[-1].startswith("```")
+
+
+def is_unordered_list_block(lines):
+    return all(line.startswith("* ") or line.startswith("- ") for line in lines)
+
+
+def is_ordered_list_block(lines):
+    for i, line in enumerate(lines, start=1):
+        if not line.startswith(f"{i}. "):
+            return False
+    return True
+
+
+def block_to_block_type(block):
+    lines = block.split("\n")
+    if is_block_heading_block(block):
         return block_type_heading
-    if len(lines) > 1 and lines[0].startswith("```") and lines[-1].startswith("```"):
+    if is_block_code_block(lines):
         return block_type_code
     if block.startswith(">"):
         for line in lines:
             if not line.startswith(">"):
                 return block_type_paragraph
             return block_type_quote
-    if block.startswith("* "):
-        for line in lines:
-            if not line.startswith("* "):
-                return block_type_paragraph
+    if block.startswith("* ") or block.startswith("- "):
+        if is_unordered_list_block(lines):
             return block_type_unordered_list
-    if block.startswith("- "):
-        for line in lines:
-            if not line.startswith("- "):
-                return block_type_paragraph
-            return block_type_unordered_list
-    if block.startswith("1. "):
-        i = 1
-        for line in lines:
-            if not line.startswith(f"{i}. "):
-                return block_type_paragraph
-            i += 1
-        return block_type_ordered_list
+    if block.startswith("1. ") and is_ordered_list_block(lines):
+            return block_type_ordered_list
     return block_type_paragraph
 
 
