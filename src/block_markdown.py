@@ -55,8 +55,7 @@ def block_to_block_type(block):
             if not line.startswith(">"):
                 return block_type_paragraph
             return block_type_quote
-    if block.startswith("* ") or block.startswith("- "):
-        if is_unordered_list_block(lines):
+    if is_unordered_list_block(lines):
             return block_type_unordered_list
     if block.startswith("1. ") and is_ordered_list_block(lines):
             return block_type_ordered_list

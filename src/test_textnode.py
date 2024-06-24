@@ -4,10 +4,8 @@ from textnode import (
     TextNode,
     text_type_text,
     text_type_bold,
-    text_type_code,
-    text_type_link,
-    text_type_image,
-    text_type_italic
+    text_type_italic,
+    text_node_to_html_node
 )
 
 
@@ -37,7 +35,7 @@ class TestTextNode(unittest.TestCase):
         )
 
     def test_t2html(self):
-        node = TextNode("This is bolded text", text_type_bold, None).text_node_to_html_node()
+        node = text_node_to_html_node(TextNode("This is bolded text", text_type_bold, None))
         self.assertEqual(node.__repr__(), "LeafNode(Tag: b, Value: This is bolded text, Props: None)")
 
 

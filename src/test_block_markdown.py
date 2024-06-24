@@ -71,7 +71,7 @@ This is the same paragraph on a new line
         self.assertEqual(block_to_block_type(block), block_type_quote)
 
     def test_block_type_ulist(self):
-        block = "- first\n * second"
+        block = "- first\n* second"
         self.assertEqual(block_to_block_type(block), block_type_unordered_list)
 
     def test_block_type_olist(self):
