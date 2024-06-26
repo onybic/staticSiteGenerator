@@ -136,9 +136,9 @@ def block_to_html(block):
         return code_block_to_html(block)
     if type_of_block == block_type_quote:
         return quote_block_to_html(block)
-    if type_of_block == block_type_olist:
+    if type_of_block == block_type_ordered_list:
         return ordered_list_block_to_html(block)
-    if type_of_block == block_type_ulist:
+    if type_of_block == block_type_unordered_list:
         return unordered_list_block_to_html(block)
     raise ValueError("Invalid block type")
 
