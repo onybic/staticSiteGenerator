@@ -56,9 +56,9 @@ def block_to_block_type(block):
                 return block_type_paragraph
             return block_type_quote
     if is_unordered_list_block(lines):
-            return block_type_unordered_list
+        return block_type_unordered_list
     if block.startswith("1. ") and is_ordered_list_block(lines):
-            return block_type_ordered_list
+        return block_type_ordered_list
     return block_type_paragraph
 
 
