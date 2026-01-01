@@ -1,22 +1,26 @@
 import os
 import shutil
 
-from copy_static import copy_static_contents
-from site_generator import generate_pages_recursive
+from copystatic import copy_files_recursive
+from gencontent import generate_pages_recursive
 
-static_dir_path = "./static"
-public_dir_path = "./public"
+
+dir_path_static = "./static"
+dir_path_public = "./public"
+dir_path_content = "./content"
+template_path = "./template.html"
 
 
 def main():
-    if os.path.exists(public_dir_path):
-        print("Cleaning up destination directory...")
-        shutil.rmtree(public_dir_path)
+    print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
 
     print("Copying static files to public directory...")
-    copy_static_contents(static_dir_path, public_dir_path)
+    copy_files_recursive(dir_path_static, dir_path_public)
 
-    generate_pages_recursive("content/", "template.html", "public/")
+    print("Generating content...")
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public)
 
 
 main()
