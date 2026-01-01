@@ -1,1 +1,1 @@
-python3 src/main.py https://onybic.github.io/staticSiteGenerator/
+python3 src/main.py /staticSiteGenerator/
